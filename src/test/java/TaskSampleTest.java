@@ -12,8 +12,7 @@ import java.net.URL;
 
 public class TaskSampleTest {
 
-    public AndroidDriver<MobileElement> driver;
-    public WebDriverWait wait;
+    public AndroidDriver driver;
 
     public static final String appPackageName = "com.tasks.android";
     public static final String appActivityName = "com.tasks.android.activities.MainActivity";
@@ -29,8 +28,9 @@ public class TaskSampleTest {
         caps.setCapability("appPackage", appPackageName);
         caps.setCapability("appActivity", appActivityName);
 
-        driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
-        wait = new WebDriverWait(driver, 10);
+        // Initialize driver
+        driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), caps);
+        driver.resetApp();
     }
 
 
@@ -38,7 +38,6 @@ public class TaskSampleTest {
     public void openMenu() throws InterruptedException {
 
         MainPage mainPage = new MainPage(driver);
-
         mainPage.openMenu();
 
     }
