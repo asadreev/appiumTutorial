@@ -1,7 +1,7 @@
-import io.appium.java_client.MobileElement;
+import com.google.common.collect.ImmutableList;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,6 +9,7 @@ import pages.MainPage;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 public class TaskSampleTest {
 
@@ -35,12 +36,17 @@ public class TaskSampleTest {
 
 
     @Test
-    public void openMenu() throws InterruptedException {
+    public void openListsMenuAndCheckTheItems() throws InterruptedException {
+
+        private List<String> expectedLabelsList = ImmutableList.of("New List", "Donate", "Help",
+                "Settings");
 
         MainPage mainPage = new MainPage(driver);
         mainPage.openMenu();
+        Assert.assertEquals(mainPage.getLabelsList(), expectedLabelsList);
 
     }
+
 
     @AfterMethod
     public void teardown() {

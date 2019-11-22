@@ -7,6 +7,8 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class MainPage {
 
 
@@ -24,14 +26,30 @@ public class MainPage {
     @AndroidFindBy(xpath = "//android.widget.ImageButton[@content-desc=\"Open\"]")
     private AndroidElement openMenu;
 
+    @AndroidFindBy(id = "com.tasks.android:id/design_navigation_view")
+    private AndroidElement navListsView;
 
-    public void clickonMenuOpenItem() {
-        openMenu.click();
-    }
+
+    @AndroidFindBy(id = "design_menu_item_text")
+    private List<AndroidElement> listsMenuItems;
 
 
     public void openMenu() {
-        clickonMenuOpenItem();
+        openMenu.click();
+        navListsView.isDisplayed();
+    }
+
+
+    public List<String> getLabelsList() {
+
+        List<String> labelsList = new ArrayList<>();
+
+        for (AndroidElement androidEl : navListsView) {
+
+            labelsList.add(androidEl.getText());
+        }
+
+        return labelsList;
     }
 
 
