@@ -6,10 +6,10 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
-import java.util.Iterator;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class MainPage {
@@ -37,28 +37,34 @@ public class MainPage {
     private List<AndroidElement> listsMenuItems;
 
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'New List')]")
+    private AndroidElement newList;
+
+
     public void openMenu() {
         openMenu.click();
         navListsView.isDisplayed();
     }
 
 
-    public List <String> getLabelsList() {
+    public List<String> getLabelsList() {
 
         List<String> labelsList = new ArrayList<String>();
 
 
-
         Iterator<AndroidElement> listIterator = listsMenuItems.iterator();
-        		while (listIterator.hasNext()) {
+        while (listIterator.hasNext()) {
 
-            	 labelsList.add(listIterator.next().getText());
+            labelsList.add(listIterator.next().getText());
 
-        		}
-
+        }
 
 
         return labelsList;
+    }
+
+    public void createNewList() {
+        newList.click();
     }
 
 

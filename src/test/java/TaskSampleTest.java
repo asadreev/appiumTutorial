@@ -1,17 +1,17 @@
 import com.google.common.collect.ImmutableList;
 import io.appium.java_client.android.AndroidDriver;
+import mobilepages.ListDetailsPage;
+import mobilepages.MainPage;
+import mobilepages.NewListPage;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-
-import mobilepages.MainPage;
 
 public class TaskSampleTest {
 
@@ -38,15 +38,28 @@ public class TaskSampleTest {
     }
 
 
-    @Test
-    public void openListsMenuAndCheckTheItems() throws InterruptedException {
+    @Test(description = "Test menu items when no list exists")
+    public void checkMenuItemsNoList() throws InterruptedException {
 
-         List<String> expectedLabelsList = ImmutableList.of("New List", "Donate", "Help", "Settings");
+        List<String> expectedLabelsList = ImmutableList.of("New List", "Donate", "Help", "Settings");
 
         MainPage mainPage = new MainPage(driver);
         mainPage.openMenu();
         Assert.assertEquals(mainPage.getLabelsList(), expectedLabelsList);
 
+    }
+
+    @Test(description = "Test menu items when there is at least one list")
+    public void checkmenuItems() throws InterruptedException {
+        List<String> expectedLabelsList = ImmutableList.of("New List", "New Filtered List", "Recorder Tasks List", "Edit List", "Deleted Items", "Donate", "Help", "Settings");
+
+        MainPage mainPage = new MainPage(driver);
+        mainPage.openMenu();
+        NewListPage newlist = new NewListPage(driver);
+        newlist.createNewList("Test List 123");
+        ListDetailsPage listdetailsPage = new ListDetailsPage(driver);
+        listdetailsPage.openMenu();
+        Assert.assertEquals(listdetailsPage.getLabelsList(), expectedLabelsList);
     }
 
 
