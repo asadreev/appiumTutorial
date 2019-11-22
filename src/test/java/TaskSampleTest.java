@@ -5,11 +5,13 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.MainPage;
+
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+
+import mobilepages.MainPage;
 
 public class TaskSampleTest {
 
@@ -30,16 +32,16 @@ public class TaskSampleTest {
         caps.setCapability("appActivity", appActivityName);
 
         // Initialize driver
-        driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), caps);
-        driver.resetApp();
+
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), caps);
+        //driver.resetApp();
     }
 
 
     @Test
     public void openListsMenuAndCheckTheItems() throws InterruptedException {
 
-        private List<String> expectedLabelsList = ImmutableList.of("New List", "Donate", "Help",
-                "Settings");
+         List<String> expectedLabelsList = ImmutableList.of("New List", "Donate", "Help", "Settings");
 
         MainPage mainPage = new MainPage(driver);
         mainPage.openMenu();

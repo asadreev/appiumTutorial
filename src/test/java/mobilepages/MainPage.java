@@ -1,4 +1,4 @@
-package pages;
+package mobilepages;
 
 
 import io.appium.java_client.android.AndroidDriver;
@@ -6,8 +6,11 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
+import java.util.Iterator;
 
 import java.util.List;
+import java.util.ArrayList;
+
 
 public class MainPage {
 
@@ -40,14 +43,20 @@ public class MainPage {
     }
 
 
-    public List<String> getLabelsList() {
+    public List <String> getLabelsList() {
 
-        List<String> labelsList = new ArrayList<>();
+        List<String> labelsList = new ArrayList<String>();
 
-        for (AndroidElement androidEl : navListsView) {
 
-            labelsList.add(androidEl.getText());
-        }
+
+        Iterator<AndroidElement> listIterator = listsMenuItems.iterator();
+        		while (listIterator.hasNext()) {
+
+            	 labelsList.add(listIterator.next().getText());
+
+        		}
+
+
 
         return labelsList;
     }
