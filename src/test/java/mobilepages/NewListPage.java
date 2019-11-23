@@ -26,8 +26,8 @@ public class NewListPage extends MainPage {
 
 
     public void createNewList(String listName) {
-        newListName.sendKeys(listName);
-        driver.sendKeyEvent(Keys.ENTER);
+        newListName.sendKeys(listName+"\n");
+        //driver.sendKeyEvent(Keys.ENTER);
         //driver.pressKeyCode(AndroidKeyCode.ENTER);
         saveList.click();
     }

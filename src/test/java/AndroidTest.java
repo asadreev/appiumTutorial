@@ -12,8 +12,9 @@ import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-public class TaskSampleTest {
+public class AndroidTest {
 
     public AndroidDriver driver;
 
@@ -34,6 +35,7 @@ public class TaskSampleTest {
         // Initialize driver
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), caps);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         //driver.resetApp();
     }
 
